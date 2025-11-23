@@ -1,28 +1,31 @@
-byte pin[] = {2, 3, 4, 5, 6, 7, 8, 9};//arduino pin array
- 
-int number[9][8] = {//number array
-  {1, 1, 0, 0, 0, 1, 1, 1},//1
-  {0, 0, 1, 0, 0, 0, 1, 0},//2
-  {1, 0, 0, 0, 0, 0, 1, 0},//3
-  {1, 1, 0, 0, 0, 1, 0, 0},//4
-  {1, 0, 0, 0, 1, 0, 0, 0},//5
-  {0, 0, 0, 0, 1, 0, 0, 0},//6
-  {1, 1, 0, 0, 0, 0, 0, 1},//7
-  {0, 0, 0, 0, 0, 0, 0, 0},//8
-  {1, 1, 0, 0, 0, 0, 0, 0},//9
+
+byte pin[] = {2, 3, 4, 5, 6, 7, 8}; // Arduino pins connected to segments a-g
+
+// Number encoding for 0-9 (common cathode)
+int number[10][7] = {
+  {1, 1, 1, 1, 1, 1, 0}, // 0
+  {0, 1, 1, 0, 0, 0, 0}, // 1
+  {1, 1, 0, 1, 1, 0, 1}, // 2
+  {1, 1, 1, 1, 0, 0, 1}, // 3
+  {0, 1, 1, 0, 0, 1, 1}, // 4
+  {1, 0, 1, 1, 0, 1, 1}, // 5
+  {1, 0, 1, 1, 1, 1, 1}, // 6
+  {1, 1, 1, 0, 0, 0, 0}, // 7
+  {1, 1, 1, 1, 1, 1, 1}, // 8
+  {1, 1, 1, 1, 0, 1, 1}  // 9
 };
- 
+
 void setup() {
-  for (byte a = 0; a < 8; a++) {
-    pinMode(pin[a], OUTPUT);//define output pins
+  for (byte i = 0; i < 7; i++) {
+    pinMode(pin[i], OUTPUT); // set all pins as outputs
   }
 }
- 
+
 void loop() {
-  for (int a = 0; a < 9; a++) {
-    for (int b = 0; b < 8; b++) {
-      digitalWrite(pin[b], number[a][b]);//display numbers
+  for (int num = 0; num < 10; num++) {      // loop through numbers 0-9
+    for (int seg = 0; seg < 7; seg++) {
+      digitalWrite(pin[seg], number[num][seg]); // light up segments
     }
-    delay(500);//delay
+    delay(500); // display each number for 0.5 seconds
   }
 }
