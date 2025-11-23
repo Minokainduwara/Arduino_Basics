@@ -1,3 +1,5 @@
+// 7 Segment Display 0 - 9
+
 
 byte pin[] = {2, 3, 4, 5, 6, 7, 8}; // Arduino pins connected to segments a-g
 
